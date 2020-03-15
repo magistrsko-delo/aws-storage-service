@@ -1,0 +1,9 @@
+kumuluzee:
+  name: mag2020-media-metadata
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8002
+    http:
+      port: 8002
