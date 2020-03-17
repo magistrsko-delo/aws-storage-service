@@ -12,6 +12,7 @@ import com.amazonaws.services.s3.model.*;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.InternalServerErrorException;
 import java.io.InputStream;
 import java.util.List;
@@ -20,17 +21,19 @@ import java.util.Random;
 @RequestScoped
 public class MediaStorageService {
 
-    AWSCredentials credentials;
-    AmazonS3 s3client;
+    @Inject
+    private AppProperties appProperties;
 
-    Random randomNumberGenerator = new Random();
+    private AmazonS3 s3client;
+
+    private Random randomNumberGenerator = new Random();
 
     @PostConstruct
     void init() {
         try{
-            credentials = new BasicAWSCredentials(
-                    "access key",
-                    "secret key"
+            AWSCredentials credentials = new BasicAWSCredentials(
+                    appProperties.getAwsAccessKey(),
+                    appProperties.getAwsSecretKey()
             );
 
             s3client = AmazonS3ClientBuilder

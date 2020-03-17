@@ -12,6 +12,7 @@
         <module>api</module>
         <module>lib</module>
         <module>services</module>
+        <module>config</module>
     </modules>
 
     <properties>
@@ -25,6 +26,7 @@
         <com.google.code.gson-vesrion>2.8.5</com.google.code.gson-vesrion>
         <aws.version>1.11.744</aws.version>
         <jersey-media-multipart-version>2.28</jersey-media-multipart-version>
+        <kumuluzee-config.version>1.2.1</kumuluzee-config.version>
 
     </properties>
     <dependencyManagement>
@@ -60,6 +62,11 @@
                 <groupId>org.glassfish.jersey.media</groupId>
                 <artifactId>jersey-media-multipart</artifactId>
                 <version>${jersey-media-multipart-version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>kumuluzee-config-etcd</artifactId>
+                <groupId>com.kumuluz.ee.config</groupId>
+                <version>${kumuluzee-config.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
