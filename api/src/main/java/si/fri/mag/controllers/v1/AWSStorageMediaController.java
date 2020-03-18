@@ -1,6 +1,5 @@
 package si.fri.mag.controllers.v1;
 
-import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -13,42 +12,18 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
-import java.util.List;
 
 @ApplicationScoped
-@Path("/v1/awsStorage")
+@Path("/v1/awsStorage/media")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AWSStorageController extends MainController {
+public class AWSStorageMediaController extends MainController {
 
     @Inject
     private MediaStorageService mediaStorageService;
 
-    @GET
-    @Path("buckets")
-    public Response getBuckets() {
-        List<Bucket> buckets = mediaStorageService.listBuckets();
-        return this.responseOk("", buckets);
-    }
-
     @POST
-    @Path("buckets/{bucketName}")
-    public Response createBucket(@PathParam("bucketName") String bucketName) {
-        Bucket bucket = mediaStorageService.createBucket(bucketName);
-        return this.responseOk("bucket created", bucket);
-    }
-
-    @DELETE
-    @Path("buckets/{bucketName}")
-    public Response deleteBucket(@PathParam("bucketName") String bucketName) {
-        boolean isDeleted = mediaStorageService.deleteBucket(bucketName);
-        return isDeleted ?
-                this.responseOk("Bucket: " + bucketName , "ok") :
-                this.responseError(400,"Bucket: " + bucketName + " not exist");
-    }
-
-    @POST
-    @Path("/media/{bucketName}/{mediaName}")
+    @Path("{bucketName}/{mediaName}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
             @FormDataParam("mediaStream") InputStream mediaStream,
@@ -63,7 +38,7 @@ public class AWSStorageController extends MainController {
     }
 
     @GET
-    @Path("/media/{bucketName}")
+    @Path("{bucketName}")
     public Response getMediaMetadataInBucket(@PathParam("bucketName") String bucketName) {
         ObjectListing mediaMetadata = mediaStorageService.getMediaMetadataInBucket(bucketName);
         if(mediaMetadata == null)
@@ -82,7 +57,7 @@ public class AWSStorageController extends MainController {
     }
 
     @GET
-    @Path("/media/{bucketName}/{mediaName}")
+    @Path("{bucketName}/{mediaName}")
     @Produces(MediaType.MULTIPART_FORM_DATA)
     public Response getMedia(@PathParam("bucketName") String bucketName, @PathParam("mediaName") String mediaName) {
         S3ObjectInputStream outputStream = mediaStorageService.getMedia(bucketName, mediaName);
