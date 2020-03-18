@@ -1,5 +1,5 @@
 kumuluzee:
-  name: mag2020-media-metadata
+  name: mag2020-aws-storage
   env:
     name: dev
   version: 1.0.0
