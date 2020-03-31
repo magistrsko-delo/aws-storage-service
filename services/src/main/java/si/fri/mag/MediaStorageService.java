@@ -7,6 +7,7 @@ import si.fri.mag.util.AmazonClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.InternalServerErrorException;
+import java.io.BufferedOutputStream;
 import java.io.InputStream;
 
 @ApplicationScoped
