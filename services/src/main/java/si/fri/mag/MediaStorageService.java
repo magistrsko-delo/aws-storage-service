@@ -5,11 +5,11 @@ import com.amazonaws.services.s3.model.*;
 
 import si.fri.mag.util.AmazonClient;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.InternalServerErrorException;
 import java.io.InputStream;
 
-@RequestScoped
+@ApplicationScoped
 public class MediaStorageService extends AmazonClient {
 
     public boolean uploadMedia(InputStream inputStream, String bucketName, String mediaName) {

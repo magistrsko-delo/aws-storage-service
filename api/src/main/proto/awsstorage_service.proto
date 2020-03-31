@@ -1,0 +1,14 @@
+syntax = "proto3";
+option java_package = "grpc";
+
+service Awsstorage {
+  rpc createBucket(CreateBucketRequest) returns (CreateBucketResponse) {};
+}
+
+message CreateBucketRequest {
+  string bucketname = 1;
+}
+
+message CreateBucketResponse {
+  string bucketname = 1;
+}

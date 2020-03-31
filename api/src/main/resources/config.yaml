@@ -12,6 +12,11 @@ kumuluzee:
     max-retry-delay-ms: 900000
     etcd:
       hosts: http://localhost:2379
+  grpc:
+    server:
+      url: localhost
+      http:
+        port: 9001
 app-properties:
   aws:
     s3:
