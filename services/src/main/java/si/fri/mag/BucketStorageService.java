@@ -4,12 +4,14 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.model.Bucket;
 import si.fri.mag.util.AmazonClient;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.ws.rs.InternalServerErrorException;
 import java.util.List;
 import java.util.Random;
 
-@RequestScoped
+@ApplicationScoped
 public class BucketStorageService extends AmazonClient {
 
     private Random randomNumberGenerator = new Random();
@@ -23,6 +25,7 @@ public class BucketStorageService extends AmazonClient {
         while(s3client.doesBucketExistV2(bucketName)){
             bucketName += Integer.toString(randomNumberGenerator.nextInt(9));
         }
+
         return  s3client.createBucket(bucketName);
     }
 

@@ -28,6 +28,8 @@
         <jersey-media-multipart-version>2.28</jersey-media-multipart-version>
         <kumuluzee-config.version>1.2.1</kumuluzee-config.version>
 
+        <grpc.version>1.18.0</grpc.version>
+        <kumuluzee.grpc.version>1.1.0</kumuluzee.grpc.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -87,6 +89,11 @@
         <dependency>
             <groupId>com.kumuluz.ee</groupId>
             <artifactId>kumuluzee-jax-rs-jersey</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.grpc</groupId>
+            <artifactId>kumuluzee-grpc</artifactId>
+            <version>${kumuluzee.grpc.version}</version>
         </dependency>
     </dependencies>
 
