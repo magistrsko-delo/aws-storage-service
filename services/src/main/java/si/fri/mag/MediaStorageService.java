@@ -8,6 +8,7 @@ import si.fri.mag.util.AmazonClient;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.InternalServerErrorException;
 import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 @ApplicationScoped
@@ -15,10 +16,14 @@ public class MediaStorageService extends AmazonClient {
 
     public boolean uploadMedia(InputStream inputStream, String bucketName, String mediaName) {
         try {
-            s3client.putObject(bucketName, mediaName, inputStream, new ObjectMetadata());
+            System.out.println("uploading media");
+            ObjectMetadata fileMetadata = new ObjectMetadata();
+            fileMetadata.setContentLength(inputStream.available());
+            s3client.putObject(bucketName, mediaName, inputStream, fileMetadata);
             return true;
-        } catch (AmazonServiceException e) {
-            throw new InternalServerErrorException(e.getErrorMessage());
+        } catch (AmazonServiceException | IOException e) {
+            e.printStackTrace();
+            throw new InternalServerErrorException(e.getMessage());
         }
     }
 
