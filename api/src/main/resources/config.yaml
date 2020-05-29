@@ -12,11 +12,34 @@ kumuluzee:
     max-retry-delay-ms: 900000
     etcd:
       hosts: http://localhost:2379
+  health:
+    checks:
+      etcd-health-check:
+        connection-url: http://localhost:2379/health
+  opentracing:
+    jaeger:
+      service-name: mag2020-aws-storage # if not set kumuluzee.name value is used
+      agent-host: localhost # default agent host
+      agent-port: 5775 # default agent port
+      reporter:
+        log-spans: true
+        max-queue-size: 10000
+        flush-interval: 1000
+      sampler:
+        type: const # default sampler type
+        param: 1 # default sampler param
+        manager-host-port: http://localhost:5775
+      traceid-128bit: true
   grpc:
     server:
       url: localhost
       http:
         port: 9001
+mp:
+  opentracing:
+    server:
+      operation-name-provider: http-path
+      skip-pattern: /openapi.*|/health.*
 app-properties:
   aws:
     s3:
