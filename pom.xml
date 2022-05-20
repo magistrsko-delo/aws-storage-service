@@ -23,7 +23,7 @@
         <kumuluzee.version>3.5.0</kumuluzee.version>
         <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
         <javax.persistence-api-version>2.2</javax.persistence-api-version>
-        <com.google.code.gson-vesrion>2.8.5</com.google.code.gson-vesrion>
+        <com.google.code.gson-vesrion>2.8.9</com.google.code.gson-vesrion>
         <aws.version>1.11.744</aws.version>
         <jersey-media-multipart-version>2.28</jersey-media-multipart-version>
         <kumuluzee-config.version>1.2.1</kumuluzee-config.version>
